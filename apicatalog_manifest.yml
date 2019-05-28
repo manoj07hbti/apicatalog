@@ -1,0 +1,12 @@
+applications:
+- name: apicatalog
+  path: ./target/apiregistry-1.0.0.jar
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  routes:
+  - route: apicatalog.apps.pas-useast1.gcp-wipro.com
+  services:
+  - apicatalog_db
+  - apicatalog_queue
+  stack: cflinuxfs3
