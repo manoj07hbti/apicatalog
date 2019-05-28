@@ -6,6 +6,6 @@ deploy:
   organization: $CF_ORG
   space: $CF_SPACE
   api: $CF_API_URL
-  manifest: apicatalog_manifest.yml
+  manifest: manifest.yml
   on:
     all_branches: true
