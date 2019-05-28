@@ -26,3 +26,6 @@ management:
       exposure:
         include: "*"
       expose: "*"
+
+publish:
+  event: true

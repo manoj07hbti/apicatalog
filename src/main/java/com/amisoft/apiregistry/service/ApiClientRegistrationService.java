@@ -1,7 +1,6 @@
 package com.amisoft.apiregistry.service;
 
 
-import com.amisoft.apiregistry.config.ApiCreateEventConfig;
 import com.amisoft.apiregistry.entity.ClientRegistation;
 import com.amisoft.apiregistry.model.ApiRegistryResponse;
 import com.amisoft.apiregistry.model.ClientRegistrationRequest;
@@ -12,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +33,9 @@ public class ApiClientRegistrationService {
 
     @Autowired
     ApplicationRegistrationService applicationRegistrationService;
+
+    @Value("${publish.event}")
+    boolean isPublish;
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -68,8 +71,14 @@ public class ApiClientRegistrationService {
                 ClientRegistrationResponse clientRegistrationResponse = new ClientRegistrationResponse();
                 BeanUtils.copyProperties(clientRegistation, clientRegistrationResponse);
 
-                rabbitTemplate.convertAndSend(EXCHANGE_NAME,ROUTING_KEY,new EventApiClientRegistration("client_registered"
-                        ,clientRegistrationRequest.getApplicationNameToRegister()));
+                if(isPublish) {
+
+                    log.info("Publishing event :  new client registered");
+
+                    rabbitTemplate.convertAndSend(EXCHANGE_NAME, ROUTING_KEY, new EventApiClientRegistration("client_registered"
+                            , clientRegistrationRequest.getApplicationNameToRegister()));
+
+                }
 
                 return Optional.of(clientRegistrationResponse);
             }else{
