@@ -5,8 +5,8 @@ applications:
   instances: 1
   memory: 1G
   routes:
-  - route: apicatalog.apps.pas-useast1.gcp-wipro.com
+  - route: apicatalog.apps.dev.pcf-aws.com
   services:
-  - apicatalog-db
-  - apicatalog-queue
+  - apicatalog_db
+  - apicatalog_queue
   stack: cflinuxfs3
