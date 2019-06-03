@@ -10,3 +10,4 @@ applications:
   - apicatalog_db
   - apicatalog_queue
   stack: cflinuxfs3
+
