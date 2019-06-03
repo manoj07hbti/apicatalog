@@ -24,6 +24,7 @@
 		<java-mail-version>1.6.2</java-mail-version>
 	</properties>
 
+
 	<dependencies>
 
 		<dependency>
