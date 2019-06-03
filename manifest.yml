@@ -7,6 +7,6 @@ applications:
   routes:
   - route: apicatalog.apps.pas-useast1.gcp-wipro.com
   services:
-  - apicatalog_db
-  - apicatalog_queue
+  - apicatalog-db
+  - apicatalog-queue
   stack: cflinuxfs3
